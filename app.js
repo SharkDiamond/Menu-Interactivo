@@ -1,25 +1,32 @@
 require('colors');
-
-const {mostrarMenu,pausa} = require('./Helpers/mensajes.js');
-
+const Tarea = require('./Modelos/Tarea');
+const Tareas = require('./Modelos/Tareas');
+//const {mostrarMenu,pausa} = require('./Helpers/mensajes.js');
+const {inquirerMenu,pausa}= require('./inquirer.js');
 
 const main= async () => {
 
 console.clear();
+let a="0";
 
-let opt="";
+do{
 
-do {
+const {opcion} = await inquirerMenu();
+console.log(opcion);
+await pausa();
+a=opcion;
 
-  opt= await mostrarMenu();
-  console.log(opt);
+const tarea=new Tarea("Comprar Comida");
+const tareas=new Tareas();
+console.log(tareas);
 
-if (opt!=="0") await pausa();
-
-} while (opt!=="0");
+} while (a!=="0");
 
 
 
 }
+
+
+
 
 main();
