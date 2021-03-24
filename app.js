@@ -3,7 +3,7 @@ const Tarea = require('./Modelos/Tarea');
 const Tareas = require('./Modelos/Tareas');
 //const {mostrarMenu,pausa} = require('./Helpers/mensajes.js');
 const {inquirerMenu,pausa,leerEntrada}= require('./inquirer.js');
-
+const {guardarDB}= require('./Helpers/saveFile.js');
 const main= async () => {
 
 console.clear();
@@ -58,6 +58,8 @@ default:
 }
 
 console.log(opcion);
+
+//guardarDB(tareas.listadoArr);
 
 await pausa();
 
