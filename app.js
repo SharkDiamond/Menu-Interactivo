@@ -3,13 +3,26 @@ const Tarea = require('./Modelos/Tarea');
 const Tareas = require('./Modelos/Tareas');
 //const {mostrarMenu,pausa} = require('./Helpers/mensajes.js');
 const {inquirerMenu,pausa,leerEntrada}= require('./inquirer.js');
-const {guardarDB}= require('./Helpers/saveFile.js');
+const {guardarDB,leerDB}= require('./Helpers/saveFile.js');
+
+
+
 const main= async () => {
 
 console.clear();
 let a="0";
 const tareas=new Tareas();
 
+
+const TareasDb=leerDB();
+
+if (TareasDb) {
+
+
+
+  
+}
+await pausa();
 do{
 
 const {opcion} = await inquirerMenu();

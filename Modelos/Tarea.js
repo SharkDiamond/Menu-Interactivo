@@ -16,4 +16,16 @@ completadoEn=null;
 }
 
 
+/*
+const Tarea(id,desc,completadoEn){
+
+this.id=uudiv4();
+this.desc=desc;
+
+
+
+
+}
+*/
+
 module.exports = Tarea;
