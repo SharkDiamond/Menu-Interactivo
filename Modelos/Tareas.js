@@ -10,6 +10,17 @@ this.listado={};
 
   }
 
+LeerTarea(data){
+
+data.forEach((item, i) => {
+
+this.listado[item.id]=data[i];
+
+});
+
+}
+
+
   get listadoArr() {
 
 const listado=[];

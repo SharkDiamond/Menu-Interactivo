@@ -1,46 +1,46 @@
+//IMPORTS
 require('colors');
 const Tarea = require('./Modelos/Tarea');
 const Tareas = require('./Modelos/Tareas');
-//const {mostrarMenu,pausa} = require('./Helpers/mensajes.js');
+
 const {inquirerMenu,pausa,leerEntrada}= require('./inquirer.js');
 const {guardarDB,leerDB}= require('./Helpers/saveFile.js');
 
 
-
+//METHOD MAIN
 const main= async () => {
 
+//CLEAR THE CONSOLE
 console.clear();
+
+//VAR OUT OF SCOPE
 let a="0";
+
+//CREATING A OBJECT OF TYPE TAREAS
 const tareas=new Tareas();
 
-
-const TareasDb=leerDB();
-
-if (TareasDb) {
-
-
-
-  
-}
-await pausa();
 do{
 
 const {opcion} = await inquirerMenu();
 
 switch (opcion) {
 
+//1. CREATING CHORES
   case "1":
-//1. Crear Tarea
+
 const descripcion=await leerEntrada("Descripcion:");
 
-//console.log(descripcion);
 tareas.crearTarea(descripcion);
-
 
     break;
 
+//2. TO LIST CHORES
   case "2":
-//2. Listar Tareas
+
+
+tareas.LeerTarea(leerDB());
+
+//SHOW THE CHORES
 console.log(tareas.listadoArr);
 
     break;
@@ -54,14 +54,14 @@ console.log(tareas.listadoArr);
 //4. Listar Tareas Pendientes
 
     break;
-
+//5. COMPLETE SHORES
   case "5":
-//5. Completar Tareas
+
 
     break;
-
+//6. DELETE AN SHORES
   case "6":
-//6. Borrar una Tarea
+
 
     break;
 
@@ -70,23 +70,21 @@ default:
 
 }
 
-console.log(opcion);
+//SAVE THE CHORES
+guardarDB(tareas.listadoArr);
 
-//guardarDB(tareas.listadoArr);
-
+//DOING AN PAUSE
 await pausa();
 
 a=opcion;
-
-
 
 } while (a!=="0");
 
 
 
-}
+}//KEY FINAL OF METHOD MAIN
 
 
 
-
+//CALL THE METHOD MAIN
 main();
