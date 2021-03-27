@@ -3,7 +3,7 @@ require('colors');
 const Tarea = require('./Modelos/Tarea');
 const Tareas = require('./Modelos/Tareas');
 
-const {inquirerMenu,pausa,leerEntrada}= require('./inquirer.js');
+const {inquirerMenu,pausa,leerEntrada,listadoTareasBorradas}= require('./inquirer.js');
 const {guardarDB,leerDB}= require('./Helpers/saveFile.js');
 
 
@@ -41,17 +41,23 @@ tareas.crearTarea(descripcion);
 tareas.LeerTarea(leerDB());
 
 //SHOW THE CHORES
-console.log(tareas.listadoArr);
+console.log("\n");
+tareas.listarTareas();
 
     break;
 
   case "3":
 //3. Listar Tareas Completadas
+tareas.LeerTarea(leerDB());
+tareas.listarTareasCompletadasoPendietes(tareas.listadoArr,"Completada");
 
     break;
 
   case "4":
 //4. Listar Tareas Pendientes
+//3. Listar Tareas Completadas
+tareas.LeerTarea(leerDB());
+tareas.listarTareasCompletadasoPendietes(tareas.listadoArr,"Pendiente");
 
     break;
 //5. COMPLETE SHORES
@@ -62,6 +68,11 @@ console.log(tareas.listadoArr);
 //6. DELETE AN SHORES
   case "6":
 
+tareas.LeerTarea(leerDB());
+
+const id = await listadoTareasBorradas(tareas.listadoArr);
+
+tareas.borrarTarea(id);
 
     break;
 
