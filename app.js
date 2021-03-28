@@ -3,7 +3,7 @@ require('colors');
 const Tarea = require('./Modelos/Tarea');
 const Tareas = require('./Modelos/Tareas');
 
-const {inquirerMenu,pausa,leerEntrada,listadoTareasBorradas}= require('./inquirer.js');
+const {inquirerMenu,pausa,leerEntrada,listadoTareasBorradas,mosrtarListadoChklist}= require('./inquirer.js');
 const {guardarDB,leerDB}= require('./Helpers/saveFile.js');
 
 
@@ -18,6 +18,10 @@ let a="0";
 
 //CREATING A OBJECT OF TYPE TAREAS
 const tareas=new Tareas();
+
+const archivoDb=leerDB();
+
+if(archivoDb) tareas.LeerTarea(leerDB());
 
 do{
 
@@ -48,27 +52,26 @@ tareas.listarTareas();
 
   case "3":
 //3. Listar Tareas Completadas
-tareas.LeerTarea(leerDB());
+
 tareas.listarTareasCompletadasoPendietes(tareas.listadoArr,"Completada");
 
     break;
 
   case "4":
 //4. Listar Tareas Pendientes
-//3. Listar Tareas Completadas
-tareas.LeerTarea(leerDB());
+
 tareas.listarTareasCompletadasoPendietes(tareas.listadoArr,"Pendiente");
 
     break;
 //5. COMPLETE SHORES
   case "5":
+const a = await mosrtarListadoChklist(tareas.listadoArr);
 
+tareas.toggleCompletadas(a);
 
     break;
 //6. DELETE AN SHORES
   case "6":
-
-tareas.LeerTarea(leerDB());
 
 const id = await listadoTareasBorradas(tareas.listadoArr);
 

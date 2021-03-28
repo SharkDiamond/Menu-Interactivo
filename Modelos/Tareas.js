@@ -54,11 +54,23 @@ let indiceCorrecto=i+1;
 
 let test;
 
-if (item.completadoEn==null) test=indiceCorrecto.toString().red;
+let completadoOno="";
 
-else if (item.completadoEn!=null) test=indiceCorrecto.toString().green;
+if (item.completadoEn==null){
 
-console.log(test,item.desc+"\n");
+test=indiceCorrecto.toString().red;
+completadoOno="::Pendiente".red;
+
+}
+
+else if (item.completadoEn!=null){
+
+test=indiceCorrecto.toString().green;
+completadoOno="::Completado".green;
+
+}
+
+console.log(test,item.desc,completadoOno+"\n");
 
 });
 
@@ -71,7 +83,7 @@ data.forEach((item, i) => {
 if (item.completadoEn!=null && CoP==="Completada"){
 
   contador=contador+1;
-  console.log(contador+1,item.desc,CoP.green);
+  console.log(contador+1,item.desc,item.completadoEn.green,CoP.green);
 
 }
 
@@ -94,9 +106,43 @@ borrarTarea(id){
 
 if (this.listado[id]) delete this.listado[id];
 
+else {
+  console.log("Correcto no se eliminara la tarea");
 }
 
 
+}
+
+toggleCompletadas(ids){
+
+  ids.forEach((item, i) => {
+
+    const tarea=this.listado[item];
+
+    if (tarea.completadoEn==null) {
+
+      tarea.completadoEn=new Date().toISOString();
+
+    }
+
+  });
+
+this.listadoArr.forEach((item, i) => {
+
+
+if (!ids.includes(item.id)) {
+
+const tarea = this.listado[item.id];
+
+tarea.completadoEn=null;
+
+
+}
+
+});
+
+
+}
 
 
 }
